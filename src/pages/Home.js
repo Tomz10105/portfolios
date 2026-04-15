@@ -99,7 +99,9 @@ function Home() {
                   <BsDiscord />
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/Tomz10105"
+                  target="_blank"
+                  rel="noreferrer"
                   className="social-icon"
                   title="GitHub"
                 >

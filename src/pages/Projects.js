@@ -41,7 +41,7 @@ function Projects() {
             {/* ── Page header ── */}
             <div className="projects-header">
               <div className="projects-title-row">
-                <span className="projects-comment">// my-projects.js</span>
+                <span className="projects-comment">{'// my-projects.js'}</span>
                 <h1 className="title-page-projects">
                   <VscFolder className="projects-folder-icon" />
                   My Projects

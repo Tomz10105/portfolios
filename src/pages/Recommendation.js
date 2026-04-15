@@ -36,7 +36,7 @@ function Recommendation() {
 
             {/* ── Page header ── */}
             <div className="services-header">
-              <span className="services-comment">// services.json</span>
+              <span className="services-comment">{'// services.json'}</span>
               <h1 className="title-recommendation">
                 Services I Provide
               </h1>

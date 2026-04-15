@@ -39,7 +39,7 @@ const PAIRS = { '(': ')', '{': '}', '[': ']', '"': '"', '`': '`' };
 const TEMPLATE = {
   js:   '// Write some JavaScript!\n\nconsole.log("Hello from the playground! 👋");\n',
   jsx:  '// Write some JSX!\n\nconst App = () => <h1>Hello World!</h1>;\n',
-  ts:   '// Write some TypeScript!\n\nconst greet = (name: string): string => `Hello, ${name}!`;\n\nconsole.log(greet("World"));\n',
+  ts:   '// Write some TypeScript!\n\nconst greet = (name: string): string => "Hello, " + name + "!";\n\nconsole.log(greet("World"));\n',
   tsx:  '// Write some TSX!\n\nconst App = (): JSX.Element => <h1>Hello World!</h1>;\n',
   html: '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n</body>\n</html>\n',
   css:  '/* My styles */\n\nbody {\n  margin: 0;\n  font-family: sans-serif;\n  background: #1e1e1e;\n  color: #d4d4d4;\n}\n',
@@ -179,7 +179,7 @@ export default function Editor() {
       const currentLine = before.split('\n').pop();
       const indent     = currentLine.match(/^(\s*)/)[1];
       // Extra indent if line ends with { or (
-      const extra      = /[{(\[]$/.test(currentLine.trimEnd()) ? '  ' : '';
+      const extra      = /[{([)$]/.test(currentLine.trimEnd().slice(-1)) ? '  ' : '';
       const insertion  = '\n' + indent + extra;
       ta.value = before + insertion + after;
       ta.selectionStart = ta.selectionEnd = ss + insertion.length;

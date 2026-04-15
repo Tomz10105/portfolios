@@ -66,7 +66,9 @@ function Footer() {
           <BsDiscord />
         </a>
         <a
-          href="#"
+          href="https://github.com/Tomz10105"
+          target="_blank"
+          rel="noreferrer"
           className="statusbar-item"
           title="GitHub"
         >

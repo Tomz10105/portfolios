@@ -107,7 +107,7 @@ function Contact() {
 
             {/* ── Right: contact form ── */}
             <div className="contact-form-panel">
-              <span className="services-comment">// send_message.js</span>
+              <span className="services-comment">{'// send_message.js'}</span>
               <h2 className="contact-form-title">Send a Message</h2>
               <p className="contact-form-sub">
                 Have a project or question? Drop me a message and I'll get back to you shortly.
