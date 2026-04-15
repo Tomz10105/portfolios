@@ -1,0 +1,316 @@
+/* ════════════════════════════════════════════
+   Playground Editor
+   ════════════════════════════════════════════ */
+
+/* Remove the 50px gutter padding on the editor page */
+.ed-main {
+  padding-left: 0 !important;
+}
+
+/* Override main-wrapper defaults for the editor */
+.main-wrapper.ed-wrapper {
+  /* Fill full height of main-container */
+  height: 100%;
+  box-sizing: border-box;
+
+  /* Push content below the two fixed bars (TitleBar 40px + Header 35px) */
+  padding-top: 75px;
+  /* Keep space for the fixed ed-statusstrip at the bottom */
+  padding-bottom: 22px;
+
+  /* Column layout — override the default align-items:center */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  overflow: hidden;
+  min-height: 0;
+
+  /* No page-enter animation for the editor */
+  animation: none;
+}
+
+/* ── Toolbar ── */
+.ed-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 32px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #3c3c3c;
+  flex-shrink: 0;
+}
+
+.ed-toolbar-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.ed-toolbar-name {
+  font-size: 12.5px;
+  font-family: 'Fira Code', monospace;
+  color: #d4d4d4;
+  white-space: nowrap;
+}
+
+.ed-toolbar-badge {
+  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  color: #858585;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 3px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.ed-toolbar-pos {
+  font-size: 11px;
+  font-family: 'Fira Code', monospace;
+  color: #6a9955;
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
+.ed-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.ed-run-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  background: linear-gradient(135deg, #0e639c, #1177bb);
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-family: 'Fira Code', monospace;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.ed-run-btn:hover { filter: brightness(1.2); }
+
+.ed-del-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: #858585;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.ed-del-btn:hover {
+  color: #e51400;
+  background-color: rgba(229, 20, 0, 0.1);
+}
+
+/* ── Editor body (gutter + textarea) ── */
+.ed-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Line-number gutter — scrolls in sync with textarea */
+.ed-gutter {
+  width: 52px;
+  flex-shrink: 0;
+  background-color: #1e1e1e;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-ln {
+  display: block;
+  height: 21px;          /* must match textarea line-height exactly */
+  line-height: 21px;
+  text-align: right;
+  padding-right: 12px;
+  font-size: 12px;
+  font-family: 'Fira Code', monospace;
+  color: #4b5263;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* The actual textarea */
+.ed-textarea {
+  flex: 1;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 21px;     /* must match .ed-ln height */
+  padding: 10px 20px;
+  tab-size: 2;
+  -moz-tab-size: 2;
+  caret-color: #aeafad;
+  overflow-y: scroll;
+  overflow-x: auto;
+  white-space: pre;
+  word-break: normal;
+  word-wrap: normal;
+}
+
+.ed-textarea::placeholder { color: #3a3a3a; }
+
+.ed-textarea::selection { background-color: #264f78; }
+
+/* Scrollbar */
+.ed-textarea::-webkit-scrollbar        { width: 8px; height: 8px; }
+.ed-textarea::-webkit-scrollbar-track  { background: #1e1e1e; }
+.ed-textarea::-webkit-scrollbar-thumb  { background: #424242; border-radius: 4px; }
+.ed-textarea::-webkit-scrollbar-thumb:hover { background: #555; }
+
+.ed-gutter::-webkit-scrollbar { display: none; }
+
+/* ── Terminal panel ── */
+.ed-terminal {
+  flex-shrink: 0;
+  height: 180px;
+  background-color: #0e0e0e;
+  border-top: 1px solid #3c3c3c;
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background-color: #252526;
+  border-bottom: 1px solid #3c3c3c;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #bbbbbb;
+  flex-shrink: 0;
+}
+
+.ed-term-icon { font-size: 14px; }
+
+.ed-term-clear,
+.ed-term-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #858585;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 13px;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.ed-term-clear { margin-left: auto; }
+.ed-term-clear:hover, .ed-term-close:hover {
+  color: #fff;
+  background-color: rgba(255,255,255,0.08);
+}
+
+.ed-term-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ed-term-hint {
+  font-size: 12px;
+  color: #555;
+  font-family: 'Fira Code', monospace;
+  font-style: italic;
+}
+
+.ed-term-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  font-family: 'Fira Code', monospace;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.ed-term-prompt         { color: #569cd6; flex-shrink: 0; width: 14px; }
+.ed-term-log            { color: #d4d4d4; }
+.ed-term-warn           { color: #cca700; }
+.ed-term-error          { color: #f14c4c; }
+.ed-term-error .ed-term-prompt { color: #f14c4c; }
+
+/* ── Terminal peek strip (visible when terminal closed) ── */
+.ed-term-peek {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 12px;
+  background-color: #252526;
+  border: none;
+  border-top: 1px solid #3c3c3c;
+  color: #858585;
+  font-size: 11.5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.ed-term-peek:hover { color: #d4d4d4; background-color: #2a2a2a; }
+
+/* ── Status strip (replaces Footer on editor pages) ── */
+.ed-statusstrip {
+  position: fixed;
+  bottom: 0;
+  left: 17.5rem;   /* sidebar width */
+  right: 0;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+  background-color: #007acc;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #ffffff;
+  z-index: 10;
+  user-select: none;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 1150px) {
+  .ed-statusstrip { left: 0; }
+  .ed-toolbar-badge { display: none; }
+}
+
+@media screen and (max-width: 700px) {
+  .ed-toolbar-pos { display: none; }
+  .ed-terminal    { height: 140px; }
+}

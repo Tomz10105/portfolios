@@ -1,0 +1,300 @@
+/* ════════════════════════════════════════════
+   VS Code – Explorer Sidebar
+   ════════════════════════════════════════════ */
+
+.side-bar-container {
+  width: 17.5rem;          /* 280 px */
+  height: 100%;
+  background-color: #252526;
+  color: #cccccc;
+  border-right: 1px solid #1e1e1e;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", sans-serif;
+}
+
+/* ── EXPLORER header row ────────────────────── */
+.explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  padding: 0 8px 0 20px;
+  flex-shrink: 0;
+}
+
+.explorer-header-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #bbbbbb;
+}
+
+.explorer-header-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #bbbbbb;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.1s, background-color 0.1s, color 0.1s;
+}
+
+.explorer-header:hover .explorer-header-action {
+  opacity: 1;
+}
+
+.explorer-header-action:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* ── Folder section row ─────────────────────── */
+.explore-section-row {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.explore-portfolio {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 100%;
+  padding: 0 0 0 3px;
+  border: none;
+  background: transparent;
+  color: #bbbbbb;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  overflow: hidden;
+}
+
+.explore-section-row:hover .explore-portfolio {
+  background-color: #2a2d2e;
+  color: #cccccc;
+}
+
+.chevron-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 16px;
+  color: #c5c5c5;
+  transition: color 0.1s;
+}
+
+.folder-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Section action icons (hover) ───────────── */
+.section-actions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 4px;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.section-actions.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.section-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: #2a2d2e;
+  color: #c5c5c5;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+.section-actions button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* ── File rows ───────────────────────────────── */
+.explorer-file {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 0 0 28px;   /* indent: chevron(16) + folder-gap(12) */
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #cccccc;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  /* no border tricks — VS Code uses full-row bg */
+}
+
+.explorer-file:hover {
+  background-color: #2a2d2e;
+  color: #cccccc;
+}
+
+/* Active / selected item — VS Code blue highlight */
+.explorer-file.active {
+  background-color: #094771;
+  color: #ffffff;
+}
+
+/* Thin accent bar on left edge of active item */
+.explorer-file.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #007acc;
+}
+
+.icon-side-bar {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.file-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── User-file divider ───────────────────────── */
+.sb-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.06);
+  margin: 4px 8px;
+  flex-shrink: 0;
+}
+
+/* User file rows get a delete button on hover */
+.explorer-user-file .sb-file-del {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: #858585;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 0;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.explorer-user-file:hover .sb-file-del { display: flex; }
+.sb-file-del:hover { color: #e51400 !important; background-color: rgba(229,20,0,0.1) !important; }
+
+/* ── Inline new-file input row ───────────────── */
+.sb-new-file-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 0 0 28px;
+  height: 22px;
+  background-color: #094771;
+  flex-shrink: 0;
+}
+
+.sb-new-file-input {
+  flex: 1;
+  background-color: #3c3c3c;
+  border: 1px solid #007acc;
+  border-radius: 2px;
+  color: #d4d4d4;
+  font-size: 12.5px;
+  font-family: 'Fira Code', monospace;
+  padding: 1px 4px;
+  outline: none;
+  min-width: 0;
+  height: 18px;
+}
+
+/* ── Mobile drawer ───────────────────────────── */
+@media screen and (max-width: 1150px) {
+  .side-bar-container {
+    border-left: 1px solid #1e1e1e;
+    border-right: none;
+    left: auto;
+    right: 0;
+    width: 0;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+  }
+
+  .side-bar-container.active {
+    width: 280px;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Fade children in after drawer opens */
+  .side-bar-container .explorer-header,
+  .side-bar-container .explore-section-row,
+  .side-bar-container .explorer-file {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .side-bar-container.active .explorer-header {
+    opacity: 1;
+    transition: opacity 0.25s ease 0.1s;
+  }
+
+  .side-bar-container.active .explore-section-row {
+    opacity: 1;
+    transition: opacity 0.25s ease 0.15s;
+  }
+
+  .side-bar-container.active .explorer-file {
+    opacity: 1;
+    transition: opacity 0.25s ease 0.2s;
+  }
+}

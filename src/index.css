@@ -1,0 +1,71 @@
+:root {
+  /* ── VS Code exact colours ── */
+  --vscode-editor-bg:        #1e1e1e;
+  --vscode-sidebar-bg:       #252526;
+  --vscode-titlebar-bg:      #3c3c3c;
+  --vscode-tab-bar-bg:       #2d2d2d;
+  --vscode-tab-active-bg:    #1e1e1e;
+  --vscode-statusbar-bg:     #007acc;
+  --vscode-border:           #2d2d2d;
+  --vscode-border-light:     #3c3c3c;
+  --vscode-selection:        #094771;
+  --vscode-text:             #d4d4d4;
+  --vscode-text-muted:       #858585;
+  --vscode-text-dim:         #4b5263;
+
+  /* ── Legacy aliases (kept for backward compat) ── */
+  --white-100:  #d4d4d4;
+  --red-100:    #f44747;
+  --blue-400:   #225aad;
+  --blue-300:   #306DCA;
+  --blue-200:   #569cd6;
+  --blue-100:   #569cd631;
+  --gray-500:   #252526;   /* sidebar / panels */
+  --gray-400:   #1e1e1e;   /* editor background  */
+  --gray-300:   #2d2d2d;   /* borders / tab bar  */
+  --gray-200:   #3c3c3c;   /* secondary panels   */
+  --gray-100:   #858585;   /* muted text         */
+
+  /* ── Neon / glow accents ── */
+  --neon-blue:    #569cd6;
+  --neon-cyan:    #9cdcfe;
+  --neon-purple:  #c586c0;
+  --neon-green:   #4ec9b0;
+  --neon-yellow:  #dcdcaa;
+
+  /* ── Gradients ── */
+  --gradient-blue:    linear-gradient(135deg, #569cd6, #c586c0);
+  --gradient-sidebar: linear-gradient(180deg, #252526 0%, #1e1e1e 100%);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--vscode-editor-bg);
+}
+
+code {
+  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas,
+    'Courier New', monospace;
+}
+
+/* ── Custom scrollbar (VS Code style) ── */
+::-webkit-scrollbar       { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 0;
+  border: 2px solid var(--vscode-editor-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ── Text selection ── */
+::selection {
+  background: var(--vscode-selection);
+  color: #ffffff;
+}
+
+html { scroll-behavior: smooth; }

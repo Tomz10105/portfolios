@@ -1,0 +1,134 @@
+.title-bar {
+  background-color: var(--gray-500);
+  border-bottom: 1px solid var(--gray-300);
+  color: var(--gray-100);
+  font-size: 13px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 2;
+  letter-spacing: 0.5px;
+  /* Subtle glass shimmer */
+  background: linear-gradient(180deg, #252a2f 0%, var(--gray-500) 100%);
+  user-select: none;
+}
+
+/* ── Centre search / title bar ── */
+.title-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  color: #afafaf;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  min-width: 220px;
+  max-width: 400px;
+}
+
+.title-search:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.18);
+  color: #d4d4d4;
+}
+
+.title-search-icon { font-size: 13px; flex-shrink: 0; }
+
+.title-search-text { flex: 1; text-align: center; }
+
+.title-search-kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  font-size: 10px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+/* Invisible spacer to balance the left traffic-light div */
+.title-wincontrols {
+  position: absolute;
+  right: 12px;
+  width: 50px;
+}
+
+.title-btn {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 8px;
+  left: 12px;
+}
+
+.minimize,
+.maximize,
+.close {
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.close {
+  background-color: #BF616A;
+}
+
+.minimize {
+  background-color: #EBCB8B;
+}
+
+.maximize {
+  background-color: #A3BE8C;
+}
+
+/* Glow on hover */
+.title-btn:hover .close {
+  box-shadow: 0 0 8px #BF616Aaa;
+  filter: brightness(1.2);
+}
+
+.title-btn:hover .minimize {
+  box-shadow: 0 0 8px #EBCB8Baa;
+  filter: brightness(1.2);
+}
+
+.title-btn:hover .maximize {
+  box-shadow: 0 0 8px #A3BE8Caa;
+  filter: brightness(1.2);
+}
+
+/* Icon symbols appear on hover */
+.close::after,
+.minimize::after,
+.maximize::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 900;
+}
+
+.title-btn:hover .close::after    { content: '✕'; opacity: 1; }
+.title-btn:hover .minimize::after { content: '−'; opacity: 1; }
+.title-btn:hover .maximize::after { content: '+'; opacity: 1; }

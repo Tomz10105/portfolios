@@ -1,0 +1,68 @@
+/* ════════════════════════════════════════════
+   Minimap  — decorative VS Code right-edge
+   ════════════════════════════════════════════ */
+
+.minimap {
+  position: fixed;
+  top: 75px;           /* below title-bar (40px) + header (35px) */
+  right: 0;
+  bottom: 22px;        /* above status bar */
+  width: 52px;
+  background-color: #1e1e1e;
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  /* Hide on small screens — not enough real estate */
+}
+
+/* Scrolling viewport highlight */
+.minimap-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Container for all fake lines */
+.minimap-lines {
+  padding: 4px 4px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+}
+
+/* One fake line */
+.mm-line {
+  display: flex;
+  align-items: center;
+  height: 3px;
+}
+
+.mm-empty { height: 5px; }  /* blank line gap */
+
+/* Coloured token block */
+.mm-token {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+  max-width: 100%;
+  min-width: 4px;
+}
+
+/* Token colours — muted versions of VS Code Dark+ syntax */
+.mm-kw  { background-color: rgba(197, 134, 192, 0.55); }   /* purple  — keywords   */
+.mm-fn  { background-color: rgba(220, 220, 170, 0.50); }   /* yellow  — functions  */
+.mm-str { background-color: rgba(206, 145, 120, 0.55); }   /* orange  — strings    */
+.mm-var { background-color: rgba(156, 220, 254, 0.45); }   /* blue    — variables  */
+.mm-num { background-color: rgba(181, 206, 168, 0.50); }   /* green   — numbers    */
+.mm-cm  { background-color: rgba(106, 153,  85, 0.45); }   /* green   — comments   */
+
+/* ── Responsive ── */
+@media screen and (max-width: 900px) {
+  .minimap { display: none; }
+}

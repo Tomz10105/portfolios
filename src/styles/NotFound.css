@@ -1,0 +1,180 @@
+/* ════════════════════════════════════════════
+   404 Not Found — VS Code themed
+   ════════════════════════════════════════════ */
+
+@keyframes nf-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nf-root {
+  min-height: 100vh;
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px; /* title-bar height */
+  padding-bottom: 22px; /* status bar height */
+  font-family: 'Fira Code', monospace;
+  animation: nf-in 0.3s ease both;
+}
+
+/* ── Fake tab bar ── */
+.nf-tabbar {
+  height: 35px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #252526;
+  display: flex;
+  align-items: stretch;
+}
+
+.nf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  background-color: #1e1e1e;
+  border-top: 1px solid #e51400;
+  border-right: 1px solid #252526;
+  font-size: 12.5px;
+  color: #d4d4d4;
+}
+
+.nf-tab-icon {
+  color: #e51400;
+  font-size: 14px;
+}
+
+/* ── Problems panel row ── */
+.nf-problems-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 16px;
+  background-color: #252526;
+  border-bottom: 1px solid #3c3c3c;
+  font-size: 12px;
+  color: #858585;
+}
+
+.nf-prob-icon { font-size: 13px; }
+.nf-prob-icon.error   { color: #e51400; }
+.nf-prob-icon.warning { color: #cca700; margin-left: 8px; }
+
+.nf-prob-count {
+  color: #d4d4d4;
+  min-width: 12px;
+}
+
+.nf-prob-path {
+  margin-left: 12px;
+  color: #9cdcfe;
+  font-size: 11.5px;
+}
+
+/* ── Code editor ── */
+.nf-editor {
+  padding: 24px 0 16px;
+  flex: 1;
+}
+
+.nf-line {
+  display: flex;
+  align-items: baseline;
+  min-height: 22px;
+  padding: 0 16px 0 0;
+}
+
+.nf-line:hover { background-color: rgba(255,255,255,0.02); }
+
+.nf-ln {
+  min-width: 44px;
+  padding: 0 16px 0 0;
+  text-align: right;
+  color: #4b5263;
+  font-size: 12px;
+  line-height: 22px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.nf-code {
+  font-size: 14px;
+  line-height: 22px;
+  color: #d4d4d4;
+  white-space: pre;
+}
+
+/* Blinking cursor */
+.nf-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background-color: #aeafad;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  opacity: 0;
+  transition: opacity 0.05s;
+}
+
+.nf-cursor.visible { opacity: 1; }
+
+/* ── Big 404 hero ── */
+.nf-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 40px 24px 60px;
+  text-align: center;
+}
+
+.nf-code-num {
+  font-size: clamp(80px, 15vw, 140px);
+  font-weight: 700;
+  font-family: 'Fira Code', monospace;
+  color: transparent;
+  background: linear-gradient(135deg, #e51400 0%, #c586c0 50%, #569cd6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1;
+  letter-spacing: -4px;
+  user-select: none;
+}
+
+.nf-msg {
+  font-size: 14px;
+  color: #858585;
+  margin: 0;
+}
+
+.nf-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #0e639c, #1177bb);
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.nf-home-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(17, 119, 187, 0.45);
+}
+
+.nf-home-btn:active { transform: translateY(0); }
+
+/* ── Responsive ── */
+@media screen and (max-width: 520px) {
+  .nf-prob-path { display: none; }
+  .nf-code { font-size: 12px; }
+}

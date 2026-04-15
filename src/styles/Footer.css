@@ -1,0 +1,102 @@
+/* ════════════════════════════════════════════
+   VS Code – Status Bar
+   ════════════════════════════════════════════ */
+
+.statusbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 22px;
+  background-color: var(--vscode-statusbar-bg);   /* #007acc */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", sans-serif;
+  font-size: 12px;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ── Sections ── */
+.statusbar-left,
+.statusbar-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.statusbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.85;
+  font-size: 11.5px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── Individual item ── */
+.statusbar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 8px;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.1s;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.statusbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Remote / branch item (leftmost, slightly darker bg) */
+.statusbar-item--remote {
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 0 12px;
+  gap: 5px;
+}
+
+.statusbar-item--remote:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Language mode — highlighted */
+.statusbar-item--lang {
+  font-weight: 500;
+}
+
+/* Error / warning icons */
+.statusbar-errors,
+.statusbar-warnings {
+  gap: 3px;
+  cursor: default;
+}
+
+.statusbar-errors:hover,
+.statusbar-warnings:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
+/* Thin divider between item groups */
+.statusbar-divider {
+  width: 1px;
+  height: 14px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* ── Icons ── */
+.statusbar-item svg {
+  font-size: 13px;
+  flex-shrink: 0;
+}

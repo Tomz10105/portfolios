@@ -1,0 +1,345 @@
+/* ════════════════════════════════════════════
+   Projects Page
+   ════════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page layout ── */
+.main-wrapper.projects {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 100px 2rem 60px;
+  min-height: 100vh;
+  overflow-y: auto;
+  gap: 0;
+}
+
+/* ── Page header ── */
+.projects-header {
+  width: min(1100px, 100%);
+  margin-bottom: 1.5rem;
+  animation: cardReveal 0.4s ease both;
+}
+
+.projects-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.projects-comment {
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: #6a9955;   /* VS Code green comment colour */
+  letter-spacing: 0.3px;
+}
+
+.title-page-projects {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--white-100);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.projects-folder-icon {
+  color: #e8ab53;   /* VS Code folder yellow */
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+/* Stats row */
+.projects-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  font-size: 12.5px;
+  color: var(--vscode-text-muted);
+  font-family: 'Fira Code', monospace;
+}
+
+.stat-num {
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.stat-sep { opacity: 0.4; }
+
+/* ── Filter bar ── */
+.filter-bar {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+  width: min(1100px, 100%);
+  animation: cardReveal 0.4s ease 0.05s both;
+}
+
+.btn-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--vscode-text-muted);
+  border: 1px solid var(--vscode-border);
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Fira Code', monospace;
+  transition: all 0.15s ease;
+}
+
+.btn-filter:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--white-100);
+}
+
+.btn-filter.active {
+  background-color: var(--vscode-selection);
+  border-color: var(--neon-blue);
+  color: #ffffff;
+}
+
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.btn-filter.active .filter-count {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Cards grid ── */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  width: min(1100px, 100%);
+  margin-bottom: 60px;
+  animation: cardReveal 0.4s ease 0.1s both;
+}
+
+/* ── Project card ── */
+.card-project {
+  display: flex;
+  flex-direction: column;
+  background-color: #252526;
+  border-radius: 6px;
+  border: 1px solid var(--vscode-border);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+
+.card-project::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-project:hover::before {
+  animation: shimmer 0.6s ease forwards;
+}
+
+.card-project:hover {
+  transform: translateY(-4px);
+  border-color: rgba(86, 156, 214, 0.4);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(86, 156, 214, 0.1);
+}
+
+/* ── Image / gradient cover ── */
+.img-container {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.img-project {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease, filter 0.3s ease;
+  filter: brightness(0.85) saturate(1.1);
+}
+
+.card-project:hover .img-project {
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1.2);
+}
+
+/* Gradient cover (no screenshot) */
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-icon {
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+/* Status badge on image */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-family: 'Fira Code', monospace;
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Card body ── */
+.card-body {
+  padding: 14px 14px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title-project {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.card-description {
+  font-size: 12.5px;
+  color: #8b949e;
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Card footer ── */
+.card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0 14px 12px;
+  flex-shrink: 0;
+}
+
+/* Tech badges */
+.technologies-container {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.span-technologies {
+  font-size: 10px;
+  font-family: 'Fira Code', monospace;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background-color: rgba(86, 156, 214, 0.1);
+  border: 1px solid rgba(86, 156, 214, 0.2);
+  color: #569cd6;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.card-project:hover .span-technologies {
+  background-color: rgba(86, 156, 214, 0.15);
+  border-color: rgba(86, 156, 214, 0.35);
+}
+
+/* Link icons */
+.links-container {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.links-container a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-border);
+  color: var(--vscode-text-muted);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s, transform 0.15s;
+}
+
+.links-container a:hover {
+  color: #ffffff;
+  border-color: rgba(86, 156, 214, 0.5);
+  background-color: rgba(86, 156, 214, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+
+  .main-wrapper.projects {
+    padding-top: 85px;
+  }
+
+  .title-page-projects {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=La+Belle+Aurore&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Page-enter animation ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Layout ── */
+.flex-container {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.main-container {
+  background-color: var(--vscode-editor-bg);
+  width: calc(100vw - 17.5rem);
+  margin-left: 17.5rem;
+  /* 50 px left padding = room for the line-numbers gutter */
+  padding-left: 50px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.main-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  animation: fadeInUp 0.35s ease both;
+}
+
+h1 { color: var(--white-100); }
+
+/* ── Hamburger ── */
+.hamburger-menu { display: none; }
+
+@media screen and (max-width: 1150px) {
+  .main-container {
+    width: 100vw;
+    margin-left: auto;
+    padding-left: 0;      /* no gutter on mobile */
+  }
+
+  .hamburger-menu {
+    cursor: pointer;
+    top: 41px;
+    position: fixed;
+    right: 10px;
+    background-color: var(--gray-500);
+    border: none;
+    outline: none;
+    height: 30px;
+    display: block;
+    z-index: 1000;
+    padding: 2px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .hamburger-menu:hover { background-color: var(--gray-300); }
+
+  .line-1, .line-2, .line-3 {
+    width: 30px;
+    height: 2px;
+    background-color: var(--white-100);
+    margin: 7px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+  }
+
+  .line-1.active {
+    transform: rotate(-45deg) translate(-7px, 7px);
+    background-color: var(--neon-blue);
+  }
+
+  .line-2.active { opacity: 0; transform: scaleX(0); }
+
+  .line-3.active {
+    transform: rotate(45deg) translate(-5.5px, -6px);
+    background-color: var(--neon-blue);
+  }
+}

@@ -1,0 +1,226 @@
+/* ════════════════════════════════════════════
+   About Page
+   ════════════════════════════════════════════ */
+
+@keyframes gradientText {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page layout ── */
+.main-wrapper.about {
+  justify-content: center;
+  gap: 4rem;
+  align-items: flex-start;
+  padding: 100px 2rem 80px;
+  overflow-y: auto;
+}
+
+.about-container {
+  width: min(780px, 90vw);
+}
+
+/* ── HTML syntax tags ── */
+.span-tag {
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 16px;
+  line-height: 2;
+  display: inline-block;
+}
+
+.span-tag.html  { color: #e06c75; }
+.span-tag.body  { color: #e5c07b; margin-left: 0.8rem; }
+.span-tag.content { color: #98c379; margin-left: 1.6rem; }
+
+/* ── Hello heading ── */
+.title-about {
+  display: inline;
+  font-size: 42px;
+  font-weight: 700;
+  margin-left: 2.4rem;
+  background: linear-gradient(135deg, #e1e1e6 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 5s ease infinite;
+}
+
+/* ── Body text ── */
+.text-about {
+  color: #abb2bf;
+  margin-left: 2.4rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.span-highlight {
+  color: var(--neon-blue);
+  font-weight: 500;
+  text-shadow: 0 0 8px rgba(88, 166, 255, 0.3);
+}
+
+/* ── Specialties grid ── */
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.85rem;
+  margin: 1rem 0 0.5rem 1.6rem;
+}
+
+/* ── Individual specialty card ── */
+.specialty-card {
+  background-color: #1c2128;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: cardIn 0.4s ease both;
+}
+
+/* Left accent bar — uses per-card colour via CSS var */
+.specialty-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--card-accent, var(--neon-blue));
+  border-radius: 8px 0 0 8px;
+  transition: width 0.2s ease;
+}
+
+/* Subtle glow behind card on hover */
+.specialty-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at 20% 50%, var(--card-accent, var(--neon-blue)), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.specialty-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4),
+              0 0 0 1px color-mix(in srgb, var(--card-accent, var(--neon-blue)) 30%, transparent);
+}
+
+.specialty-card:hover::before {
+  width: 4px;
+}
+
+.specialty-card:hover::after {
+  opacity: 0.05;
+}
+
+/* Card header row */
+.specialty-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.specialty-emoji {
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.specialty-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white-100);
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Description */
+.specialty-desc {
+  font-size: 0.82rem;
+  color: #768390;
+  line-height: 1.65;
+  margin: 0 0 0.75rem;
+}
+
+/* Tech tags */
+.specialty-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.specialty-tag {
+  font-size: 0.7rem;
+  font-family: 'Fira Code', monospace;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: color-mix(in srgb, var(--card-accent, var(--neon-blue)) 80%, #ffffff);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.specialty-card:hover .specialty-tag {
+  background-color: color-mix(in srgb, var(--card-accent, var(--neon-blue)) 12%, transparent);
+  border-color: color-mix(in srgb, var(--card-accent, var(--neon-blue)) 35%, transparent);
+}
+
+/* ── Icon cloud ── */
+.iconCloud-container {
+  width: 420px;
+  flex-shrink: 0;
+  margin-top: 110px;
+  position: sticky;
+  top: 100px;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 1200px) {
+  .main-wrapper.about {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 100px;
+  }
+
+  .about-container {
+    width: min(700px, 94vw);
+  }
+
+  .iconCloud-container {
+    width: 320px;
+    margin-top: 0;
+    position: static;
+    margin-bottom: 60px;
+  }
+
+  .specialties-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .title-about {
+    font-size: 30px;
+  }
+
+  .specialties-grid {
+    margin-left: 0;
+  }
+}
