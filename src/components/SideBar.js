@@ -16,6 +16,8 @@ function nextUntitled(existingNames) {
   return `untitled-${i}.js`;
 }
 
+
+
 function SideBar() {
   const { activeSideBar, addTab, userFiles, createUserFile, deleteUserFile, closeTab } =
     useContext(myContext);
